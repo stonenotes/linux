@@ -1,0 +1,18 @@
+本视频的目标是使用IDEA编辑器创建一个Maven项目
+	前提：假设您已经安装好了IDEA编辑器，由于编辑器自带Maven插件，不需要单独安装maven。当然IDEA本身是支持安装外部的maven的。
+	
+	1、打开编辑器
+		笔者使用的是14.1 不是当前最新编辑器
+	2、创建maven项目第一步：
+		依次点击软件左上角的File->new->project
+		然后选择maven，并点击next。在这一步有一个需要注意的地方，就是为你的项目选择JDK或者SDK.如果您之前没有配置过JDK，可以点击new按钮，设置您JDK的home目录。
+	3、填写maven项目的groupid,和artifactid。然后点击下一步
+		一般来讲，groupid写您的公司及部门或项目的名称，比如：cn.itcast.bigdata
+				  artifactid写您的子项目或者子模块的名字，比如当前项目是创建maven项目，我们可以将artifactid写成：learnMaven
+				  version可以不用修改
+				 
+	4、填写项目名称及指定项目所在的目录
+		projectName：learnMaven
+		location：任意地址---->比如：E:\itcast\learnMaven
+		
+至此，创建maven项目完毕。

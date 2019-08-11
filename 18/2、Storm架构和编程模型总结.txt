@@ -1,0 +1,27 @@
+1、编程模型
+	DataSource：外部数据源
+	Spout：接受外部数据源的组件，将外部数据源转化成Storm内部的数据，以Tuple为基本的传输单元下发给Bolt
+	Bolt:接受Spout发送的数据，或上游的bolt的发送的数据。根据业务逻辑进行处理。发送给下一个Bolt或者是存储到某种介质上。介质可以是Redis可以是mysql，或者其他。
+	Tuple：Storm内部中数据传输的基本单元，里面封装了一个List对象，用来保存数据。
+	StreamGrouping:数据分组策略
+		7种：shuffleGrouping(Random函数),Non Grouping(Random函数),FieldGrouping(Hash取模)、Local or ShuffleGrouping 本地或随机，优先本地。
+		
+2、并发度
+	用户指定的一个任务，可以被多个线程执行，并发度的数量等于线程的数量。一个任务的多个线程，会被运行在多个Worker（JVM）上，有一种类似于平均算法的负载均衡策略。尽可能减少网络IO，和Hadoop中的MapReduce中的本地计算的道理一样。
+	
+	
+3、架构
+	Nimbus：任务分配
+	Supervisor：接受任务，并启动worker。worker的数量根据端口号来的。
+	Worker:执行任务的具体组件（其实就是一个JVM）,可以执行两种类型的任务，Spout任务或者bolt任务。
+	Task：Task=线程=executor。 一个Task属于一个Spout或者Bolt并发任务。
+	Zookeeper：保存任务分配的信息、心跳信息、元数据信息。
+	
+4、Worker与topology
+	一个worker只属于一个topology,每个worker中运行的task只能属于这个topology。    反之，一个topology包含多个worker，其实就是这个topology运行在多个worker上。
+	一个topology要求的worker数量如果不被满足，集群在任务分配时，根据现有的worker先运行topology。如果当前集群中worker数量为0，那么最新提交的topology将只会被标识active，不会运行，只有当集群有了空闲资源之后，才会被运行。
+	
+	
+	
+		
+	
